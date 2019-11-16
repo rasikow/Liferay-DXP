@@ -1,0 +1,4 @@
+Bundle-Name: student-web-mvc
+Bundle-SymbolicName: com.zubair.learning.student
+Bundle-Version: 1.0.0
+Export-Package: com.zubair.learning.student.constants

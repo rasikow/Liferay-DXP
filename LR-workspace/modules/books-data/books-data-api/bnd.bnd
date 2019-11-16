@@ -1,0 +1,9 @@
+Bundle-Name: books-data-api
+Bundle-SymbolicName: books.data.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	books.data.exception,\
+	books.data.model,\
+	books.data.service,\
+	books.data.service.persistence
+-includeresource: META-INF/service.xml=../books-data-service/service.xml

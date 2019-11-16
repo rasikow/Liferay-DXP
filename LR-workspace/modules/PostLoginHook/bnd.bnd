@@ -1,0 +1,3 @@
+Bundle-Name: PostLoginHook
+Bundle-SymbolicName: com.zubair.post.login.hook
+Bundle-Version: 1.0.0

@@ -1,0 +1,5 @@
+Bundle-Name: CoreJspHook
+Bundle-SymbolicName: CoreJspHook
+Bundle-Version: 1.0.0
+Export-Package: CoreJspHook.constants
+

@@ -1,0 +1,4 @@
+Bundle-Name: AutoLogin-Hook
+Bundle-SymbolicName: AutoLogin.Hook
+Bundle-Version: 1.0.0
+Export-Package: AutoLogin.Hook.api

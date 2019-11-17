@@ -1,13 +1,6 @@
 <%@ include file="/init.jsp" %>
 
-
-
-<%@page import="java.util.List"%>
-<%@page import="com.liferay.portal.kernel.model.User"%>
-<%@page import="com.liferay.portal.kernel.util.ListUtil"%>
-<%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
-
-
+<h1>Search Container  :</h1> <br/>
 
 <%
  List<User> users = UserLocalServiceUtil.getUsers(-1,-1);
@@ -33,3 +26,4 @@
 </liferay-ui:search-container>
 
 <a href='<portlet:renderURL/>'><< Go Back</a>
+

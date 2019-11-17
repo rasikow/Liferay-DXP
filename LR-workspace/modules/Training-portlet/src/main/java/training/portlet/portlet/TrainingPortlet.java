@@ -10,6 +10,8 @@ import com.liferay.portal.kernel.util.PortalUtil;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -34,11 +36,16 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.init-param.view-template=/view.jsp", "javax.portlet.name=" + TrainingPortletKeys.TRAINING,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
+
 public class TrainingPortlet extends MVCPortlet {
 
+	
+	
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
+		
+					
 		// TODO Auto-generated method stub
 		super.render(renderRequest, renderResponse);
 	}
@@ -49,21 +56,22 @@ public class TrainingPortlet extends MVCPortlet {
 			throws IOException, PortletException {
 		// TODO Auto-generated method stub
 		System.out.println("#######process action default##############");
+		actionResponse.getRenderParameters().setValue("mvcPath", "/view.jsp");
 		super.processAction(actionRequest, actionResponse);
 	}
 
-	@ProcessAction(name = "processActionMethod")
-	public void callProcessActionMethod(ActionRequest actionRequest, ActionResponse actionResponse) {
+	@ProcessAction(name = "customProcessActionMethod")
+	public void customProcessActionMethod(ActionRequest actionRequest, ActionResponse actionResponse) {
 
 		String paramValue = ParamUtil.getString(actionRequest, "name");
-		if (paramValue != null) {
-			System.out.println("#######Value##############" + paramValue);
-		}
+		
+		System.out.println("#######Value##############" + paramValue);
+		
 		System.out.println("#######callProcessActionMethod##############");
 	}
 
-	@ProcessAction(name = "submitPersonalInfo")
-	public void submitPersonalInfo(ActionRequest actionRequest, ActionResponse actionResponse) {
+	@ProcessAction(name = "submitPersonalInfoMethod")
+	public void submitPersonalInfoMethod(ActionRequest actionRequest, ActionResponse actionResponse) {
 
 		String firstName = ParamUtil.getString(actionRequest, "firstName");
 		String lastName = ParamUtil.getString(actionRequest, "lastName");
@@ -73,57 +81,34 @@ public class TrainingPortlet extends MVCPortlet {
 		System.out.println("#######lastName##############" + lastName);
 		System.out.println("#######iqama##############" + iqama);
 
+		List<String> list = new ArrayList<String>();
+		list.add(firstName);
+		list.add(lastName);
+		list.add(iqama);
+		
+		actionRequest.setAttribute("list",list);
+	
 		// Redirect to success
-		actionResponse.getRenderParameters().setValue("jspPage", "/success.jsp");
+		actionResponse.getRenderParameters().setValue("mvcPath", "/success.jsp");
 		
 		/* actionResponse.setRenderParameter("jspPage", "/success.jsp"); */
 
 	}
 
-	/*
-	 * no framework
-	 * 
-	 * @Override public void serveResource(ResourceRequest resourceRequest,
-	 * ResourceResponse resourceResponse) throws IOException, PortletException {
-	 * System.out.
-	 * println("#######inside servr resource ( no framework )##############");
-	 * String firstName = ParamUtil.getString(resourceRequest, "fname"); String
-	 * lastName = ParamUtil.getString(resourceRequest, "lname");
-	 * 
-	 * 
-	 * System.out.println("#######fName##############" + firstName);
-	 * System.out.println("#######lName##############" + lastName); // TODO
-	 * Auto-generated method stub super.serveResource(resourceRequest,
-	 * resourceResponse); }
-	 */
 
-	/*
-	 * alloy
-	 * 
-	 * @Override public void serveResource(ResourceRequest resourceRequest,
-	 * ResourceResponse resourceResponse) throws PortletException, IOException {
-	 * System.out.println("#######inside servr resource ( alloy )##############" );
-	 * String param = ParamUtil.getString(resourceRequest, "name"); 
-	 * Writer wtr =resourceResponse.getWriter(); 
-	 * JSONObject jsonObj = JSONFactoryUtil.createJSONObject();  
-	 * jsonObj.put("value", param);
-	 * wtr.write(jsonObj.toString()); 
-	 * wtr.flush();
-	 *  }
-	 */
-	
 	
 	
 	  @Override 
 	  public void serveResource(ResourceRequest resourceRequest,
 		  ResourceResponse resourceResponse) throws PortletException, IOException {
-		  System.out.println("#######inside servr resource ( jquery )##############" );
+		  System.out.println("#######inside serve resource ##############" );
 		    String param1 =ParamUtil.getString(resourceRequest,"fname");
 		  String param2 =ParamUtil.getString(resourceRequest,"lname");
 		  
 		  System.out.println("#######param1##############" + param1);
 		  
 		  System.out.println("#######param2##############" + param2);
+		 
 		
 		  
 		// Creating a JSON object .

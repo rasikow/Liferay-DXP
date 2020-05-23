@@ -1,0 +1,10 @@
+<portlet:actionURL name="callMVCAction" var="callMVCActionURL"></portlet:actionURL>
+
+<form id="Frm_MVC_Action" action="${callMVCActionURL}" method="post">
+	<button id="submit" class="btn btn-primary">Submit</button>
+  <input type="submit" id="submit" class="btn btn-primary" value="Submit"/>
+</form>
+
+<script>
+$('#Frm_MVC_Action').submit();
+</script>

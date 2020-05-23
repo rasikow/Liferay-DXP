@@ -11,3 +11,11 @@ JSP page to another JSP
 </portlet:renderURL>
  
 <a href="<%=renderURL.toString()%>">Go to Form Page</a>
+
+JSP to MVCRender
+=======================
+<portlet:renderURL var="renderURL">
+  <portlet:param name="mvcRenderCommandName" value="renderCommandClass" />
+</portlet:renderURL>
+
+create mvcrendercommand class with the above id:   "mvc.command.name=renderCommandClass"

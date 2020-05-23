@@ -1,10 +1,42 @@
+Form submit through jquery:
+==========================
+
 <portlet:actionURL name="callMVCAction" var="callMVCActionURL"></portlet:actionURL>
 
 <form id="Frm_MVC_Action" action="${callMVCActionURL}" method="post">
-	<button id="submit" class="btn btn-primary">Submit</button>
-  <input type="submit" id="submit" class="btn btn-primary" value="Submit"/>
-</form>
+	<button id="submitId" class="btn btn-primary">Submit</button>
+  </form>
 
 <script>
-$('#Frm_MVC_Action').submit();
+$(document).ready(function(){
+ $("#submitId").click(function(e)({
+   $("#Frm_MVC_Action").submit();
+ )};
+)};
+
 </script>
+
+Form submit through javascript:
+==========================
+<form id="Frm_MVC_Action" action="${callMVCActionURL}" method="post">
+	<button type="button" onclick="callSubmit()">Click this button</button>
+  </form>
+
+<script>
+function callSubmit()
+{
+$("#Frm_MVC_Action").submit();
+}
+</script>
+	
+</div>
+
+
+Form submit without JS :
+===========
+<portlet:actionURL var="callMVCActionURL" name="callMVCAction">
+</portlet:actionURL>
+
+<form action="<%=callMVCActionURL%>" name="studentForm"  method="POST">
+  <input  type="text" name="<portlet:namespace/>firstName" id="<portlet:namespace/>firstName"/><br/>
+</form>

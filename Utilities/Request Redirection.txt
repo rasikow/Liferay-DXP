@@ -1,21 +1,59 @@
-Mvcactioncommand to jsp page:
-===========================
+1. Mvcactioncommand to jsp page:
+   ===========================
 
-	actionResponse.setRenderParameter("jspPage", "/jsp/xxxxx/nextPage.jsp"); // depreciate
+	actionResponse.setRenderParameter("jspPage", "/jsp/zubair/nextPage.jsp"); // depreciateed
+	  or
+	actionResponse.getRenderParameters().setValue("jspPage", "/jsp/zubair/nextPage.jsp"); // portlet 3.0
 	
-JSP page to another JSP
-=======================
+	
+2. Mvcactioncommand to MVCRenderCommand page:
+   =========================================	
+
+actionResponse.getRenderParameters().setValue("mvcRenderCommandName", "voucherRender");
+
+3. JSP page to another JSP
+   =======================
 
 <portlet:renderURL var="renderURL">
-    <portlet:param name="jspPage" value="/jsp/xxx/nextPage.jsp"/>
+    <portlet:param name="jspPage" value="/jsp/zubair/nextPage.jsp"/>
 </portlet:renderURL>
  
 <a href="<%=renderURL.toString()%>">Go to Form Page</a>
 
-JSP to MVCRender
-=======================
+4. JSP to JSP via MVCRender
+   =======================
 <portlet:renderURL var="renderURL">
   <portlet:param name="mvcRenderCommandName" value="renderCommandClass" />
 </portlet:renderURL>
 
-create mvcrendercommand class with the above id:   "mvc.command.name=renderCommandClass"
+
+MVCRenderCommand.
+-------------
+
+package com.tawuniya.vitlity.voucher.portlet.command;
+
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+
+import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import org.osgi.service.component.annotations.Component;
+
+@Component(
+	     immediate = true,
+	     property = {
+	    	"javax.portlet.name="+<portletname>,
+	        "mvc.command.name=renderCommandClass"
+	     },
+	     service = MVCRenderCommand.class
+	 )
+	public class SampleRenderCommand implements MVCRenderCommand {
+
+	 @Override
+	 public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
+	  System.out.println("Hey you are in render Method of voucher...!!");
+	  return "/jsp/zubair/next-page.jsp";
+	 }
+
+	}

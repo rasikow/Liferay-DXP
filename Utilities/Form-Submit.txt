@@ -8,12 +8,12 @@ Form submit through jquery:
   </form>
 
 <script>
-$(document).ready(function(){
- $("#submitId").click(function(e)({
-   $("#Frm_MVC_Action").submit();
- )};
-)};
 
+$(document).ready(function(){
+ $("#submitId").click(function(e){
+   $("#Frm_MVC_Action").submit();
+ });
+});
 </script>
 
 Form submit through javascript:

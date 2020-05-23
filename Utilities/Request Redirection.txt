@@ -2,3 +2,12 @@ Mvcactioncommand to jsp page:
 ===========================
 
 	actionResponse.setRenderParameter("jspPage", "/jsp/xxxxx/nextPage.jsp"); // depreciate
+	
+JSP page to another JSP
+=======================
+
+<portlet:renderURL var="renderURL">
+    <portlet:param name="jspPage" value="/jsp/xxx/nextPage.jsp"/>
+</portlet:renderURL>
+ 
+<a href="<%=renderURL.toString()%>">Go to Form Page</a>

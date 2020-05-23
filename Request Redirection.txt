@@ -1,0 +1,5 @@
+Mvcactioncommand to jsp page:
+===========================
+
+	actionResponse.setRenderParameter("jspPage", "/jsp/xxxxx/nextPage.jsp"); // depreciate
+  

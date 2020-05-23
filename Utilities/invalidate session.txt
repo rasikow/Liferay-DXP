@@ -1,0 +1,16 @@
+HttpServletRequest origHttpServletRequest = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(actionRequest));
+	
+			
+			HttpSession session = origHttpServletRequest.getSession(false);
+			if (origHttpServletRequest.isRequestedSessionIdValid() && session != null) {
+				session.invalidate();
+			}
+	HttpServletResponse response = PortalUtil.getHttpServletResponse(actionResponse);
+			Cookie[] cookies = origHttpServletRequest.getCookies();
+			for (Cookie cookie : cookies) {
+				cookie.setMaxAge(0);
+				cookie.setValue(null);
+				cookie.setPath("/");
+				response.addCookie(cookie);
+			
+		}

@@ -1,0 +1,16 @@
+Read the property value from portlet.properties in DXP
+
+1. add portlet.properties in Resource folder
+
+  members-home-page-captcha-required = true
+
+2. 	private static final Configuration _configuration = ConfigurationFactoryUtil
+		    .getConfiguration(PortalClassLoaderUtil.getClassLoader(), "portlet");
+
+		    // Read the captcha value from portlet property
+			String captchaValue = _configuration.get("members-home-page-captcha-required");
+			boolean isCaptchaRequired= false;
+			if(null != captchaValue && !captchaValue.isEmpty() && 
+					"true".equals(captchaValue)) {
+				isCaptchaRequired = true;
+			}

@@ -1,0 +1,14 @@
+Bundle-Name: Training-Portlet
+Bundle-SymbolicName: training.portlet
+Bundle-Version: 1.0.0
+Export-Package: training.portlet.constants
+
+Import-Package: \
+	com.liferay.portal.kernel.portlet.bridges.mvc;version=1.6.0,\
+	javax.portlet;resolution:=optional,\
+	com.liferay.portal.kernel.util;resolution:=optional,\
+	javax.servlet.http;resolution:=optional,\
+	com.liferay.portal.kernel.json;resolution:=optional,\
+	com.liferay.portal.kernel.servlet;resoulution:=optional
+
+

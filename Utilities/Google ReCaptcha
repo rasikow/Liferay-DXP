@@ -1,0 +1,124 @@
+Captcha In Liferay Registration
+==============================
+
+	1. Enable the captcha in "system setting" - "security tools"- by providing "public" and "private " key. Google will provide keys.
+	 
+      Private Key:
+         abcddfsdf435345345353-DDRp-_SMp6WM-j
+
+      Public key:
+           abcddfsdf435345345353g54654ggfh
+
+    2. Add this line in jsp:   creae account.jsp
+
+        <liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" id="/login/captcha" var="captchaURL" />
+                <liferay-captcha:captcha
+                  url="<%= captchaURL %>"
+                />
+        <span id="recaptcha-error" style="color:red"><liferay-ui:message key='require-captcha'/></span>
+
+            OR
+            ==
+            
+    2. Add this line in jsp:   creae account.jsp (add script inside jsp )
+
+        <div class="g-recaptcha" data-sitekey="6LeuG6EUAAAAAJ6nK9La5gUgTkLb0T3zlZN0wqQf"></div>
+         <span id="recaptcha-error" style="color:red"><liferay-ui:message key='require-captcha'/></span>
+
+        <script src="https://www.google.com/recaptcha/api.js" async defer th:if="${lang == 'en'}" ></script>
+        <script src="https://www.google.com/recaptcha/api.js?hl=ar" async defer th:if="${lang == 'ar'}" ></script>
+
+ 
+    3. JS(to read captcha validation response key):
+        ======================================
+
+        var captcha = grecaptcha.getResponse();
+
+        function IsRecapchaValid()
+                  {
+                  var captcha = grecaptcha.getResponse();
+                    if (captcha == "" || captcha == undefined || captcha.length == 0)
+                       {
+
+                      $('#recaptcha-error').show();
+                                    return false;
+                       }
+
+
+                   return true;
+                  }
+
+
+		
+		
+		
+		4. validating with google siteverify in javascript:
+		    ===================================================
+		
+        grecaptcha.ready(function() {
+                         grecaptcha.execute('http://www.google.com/recaptcha/api/siteverify', {action: form})
+                         .then(function(token) {
+                          console.log(token)
+                          document.getElementById('g-recaptcha-response').value =    captcha;
+                         }); 
+                        }); 
+
+		
+		5. validating with google siteverify in java:
+		  ==========================================
+		protected boolean validateChallenge(PortletRequest portletRequest)
+				throws CaptchaException {
+	
+			  HttpServletRequest request = PortalUtil.getHttpServletRequest(portletRequest);
+			  
+				String captchaResponseValue = ParamUtil.getString(portletRequest, "captchaResponseId");
+	
+				String url = "https://www.google.com/recaptcha/api/siteverify";
+				Http.Options options = new Http.Options();
+				
+				try {
+									
+					url = HttpUtil.addParameter(url,"secret"," abcddfsdf435345345353-DDRp-_SMp6WM-j");
+							
+				} catch (SystemException se) {
+					System.out.println(""+se);
+				}
+	
+				url = HttpUtil.addParameter(url, "response", captchaResponseValue);
+				url = HttpUtil.addParameter(url, "remoteip", getClientIPAddress(portletRequest));
+				options.setLocation(url);
+				options.setPost(true);
+	
+				String content = null;
+	
+				try {
+					content = HttpUtil.URLtoString(options);
+				}
+				catch (IOException ioe) {
+					System.out.println("IOException:"+ioe);
+	
+					throw new CaptchaTextException();
+				}
+	
+				if (content == null) {
+					System.out.println("reCAPTCHA did not return a result");
+						throw new CaptchaTextException();
+				} else if (Validator.isNotNull(content)) {
+					JSONObject jsonObject;
+					boolean isReCaptcha = false;
+					try {
+						jsonObject = JSONFactoryUtil.createJSONObject(content);
+						isReCaptcha = jsonObject.getBoolean("success");
+					} catch (JSONException e) {
+						System.out.println("reCAPTCHA did not return a valid result: " + content);
+					}
+				System.out.println("isReCaptcha " + isReCaptcha);
+				return isReCaptcha;
+			}
+				
+				return false;
+	
+		}
+
+		Ref:		Mvc action: https://portal.liferay.dev/docs/7-1/tutorials/-/knowledge_base/t/adding-logic-to-mvc-commands
+		

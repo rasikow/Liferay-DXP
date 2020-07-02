@@ -1,0 +1,40 @@
+package com.java.test;
+
+import java.util.*;
+import java.io.*;
+
+public class JavaTest {
+
+	        public static void main(String args[]) throws FileNotFoundException {
+	        
+	        File file =new File("D:\\complete-log-file.log");
+	        Scanner in = null;
+	       
+	        String allLines = "";
+	                
+	        try {
+	            in = new Scanner(file);
+	            while(in.hasNext())
+	            {
+	                String line=in.nextLine();
+	                if(line.contains("TOTAL SERVICE TIME")) {
+	                	System.out.println("Results:");
+	                  System.out.println(line);
+	                  allLines = allLines + line;
+	                  
+	                }
+	            }
+	            
+	            FileOutputStream fout = new FileOutputStream("D:\\partial-log-file.txt");
+	            byte[] b = allLines.getBytes();
+	            fout.write(b);
+              fout.close();
+              
+	        } catch (IOException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } finally {
+	        	in.close();
+	        }
+	    }
+}

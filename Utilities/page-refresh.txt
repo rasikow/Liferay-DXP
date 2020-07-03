@@ -1,0 +1,12 @@
+refresh the page:
+=================
+
+script:
+
+	setTimeout(function(){
+   window.location.reload(1);
+}, 5000);
+
+jsp:
+
+<META http-equiv="refresh" content="10;URL=http://yournewurl">

@@ -1,0 +1,9 @@
+By default, the plugin creates a configuration called portalCommonCSS and adds a dependency to the latest released version of the Liferay Frontend Common CSS artifact. It is possible to override this setting and use a specific version of the artifact by manually adding a dependency to the portalCommonCSS configuration:
+
+build.gradle :
+
+dependencies {
+
+	portalCommonCSS group: "com.liferay", name: "com.liferay.frontend.css.common", version: "4.0.0"
+
+}

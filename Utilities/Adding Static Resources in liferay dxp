@@ -1,0 +1,35 @@
+
+Approach 1: 
+===========
+Add this in .bnd file:
+Web-ContextPath: /<portlet-name>
+
+<script src="/o/<portlet-name>/js/custom.js"></script>
+
+ref:https://itsliferay.blogspot.com/2017/03/include-static-resources-liferaydxp.html
+
+Approach 2: 
+===========
+
+1. Add js files inside the theme 
+
+2.include in jsp :
+
+<script>
+    define._amd = define.amd;
+    define.amd = false;
+</script>
+<script src="${javascript_folder}/custom.js"></script>
+
+
+<script>
+    define.amd = define._amd;
+</script>
+
+Ref:https://liferay.dev/forums/-/message_boards/message/84419309
+
+Approach 3: 
+==========
+Add js path in portlet controller:
+
+"com.liferay.portlet.footer-portlet-javascript=/js/custom.js",

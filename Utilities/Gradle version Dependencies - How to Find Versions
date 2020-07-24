@@ -1,0 +1,31 @@
+if you are facing the unresolved depedencies issues during compile and runtime, here is the tips to solve:
+
+For example,
+
+1. in build.gradle
+
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel"
+	
+}
+
+2. if you dont mention version, BND file (.bnd) will take the default version and
+   add in "Import-Package" of Manifest.mf file
+   
+   Here portal-kernel.jar from tomcat/lib has 2.0.0 version of particular package ( mvc / json /util) ( open manifest file and check) and 
+    .gradle repository has 3.6.2 version. [.gradle\caches\modules-2\files-2.1\]
+   so you might get unresolved depedencies issue in runtime.
+
+3. To solve this : add the proper version in build.gradle finding from server jar using gogoshell / manually
+                      or
+                   add the version ranges in .bnd as below:
+                   
+                   Import-Package:\
+  com.liferay.portal.kernel.portlet.bridges.mvc;version="[2.0.0,3.6.2)",\
+  *
+  
+  
+  or
+  
+  1. you can give the bundle version of portal-kernel which is there in tomcat/lib : Bundle-Version: 4.0.0
+  Ref:https://liferay.dev/blogs/-/blogs/choosing-osgi-versions-during-development

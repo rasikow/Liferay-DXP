@@ -1,0 +1,15 @@
+Open your ~/.gradle/gradle.properties file. Create this file if it does not exist.
+
+Add the following properties to the file:
+
+systemProp.http.proxyHost=www.somehost.com
+systemProp.http.proxyPort=8080
+systemProp.https.proxyHost=www.somehost.com
+systemProp.https.proxyPort=8080
+
+If the proxy server requires authentication, also add the following properties:
+
+systemProp.http.proxyUser=userId
+systemProp.http.proxyPassword=yourPassword
+systemProp.https.proxyUser=userId
+systemProp.https.proxyPassword=yourPassword

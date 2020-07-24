@@ -1,0 +1,47 @@
+<portlet:renderURL var="renderPage">
+</portlet:renderURL>
+
+<ul class="list-group">
+<li class="list-group-item active" style="font-size: 1.875rem;">Liferay Devlopment</li>
+  <li class="list-group-item"><a href='<%=renderPage%>&id=1'>Redirect To Render URL Page</a></li>
+  <li class="list-group-item"><a href="'<%=renderPage%>&id=2'">Redirect To Action URL Page</a></li>
+  <li class="list-group-item"><a href="'<%=renderPage%>&id=3'">Redirect To Resource URL Page</a></li>
+  <li class="list-group-item"><a href="'<%=renderPage%>&id=4'">Redirect To "Passing Data from Action to View" Page</a></li>
+  <li class="list-group-item"><a href="'<%=renderPage%>&id=5'">Rediect To MVCCommands Page</a></li>
+  <li class="list-group-item"><a href="'<%=renderPage%>&id=6'">Redirect To CRUD with Service Builder Page</a></li>
+   <li class="list-group-item"><a href="'<%=renderPage%>&id=7'">Redirect To Liferay APIs Page</a></li>
+</ul>
+
+
+========
+
+	
+	@Override
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
+			throws IOException, PortletException {
+		
+		String value = "1";
+		System.out.println("#######ID##############" +value);
+				  
+		if(value.equalsIgnoreCase("1")) {
+			  include("/renderURL.jsp", renderRequest, renderResponse);
+		} else if(value.equalsIgnoreCase("2")) {
+			include("/actionURL.jsp",  renderRequest, renderResponse);
+		}else if(value.equalsIgnoreCase("3")) {
+			include("/resourceURL.jsp",  renderRequest, renderResponse);
+		}else if(value.equalsIgnoreCase("4")) {
+			include("/passingData.jsp",  renderRequest, renderResponse);
+		}else if(value.equalsIgnoreCase("5")) {
+			include("/mvcCommand.jsp",  renderRequest, renderResponse);
+		}else if(value.equalsIgnoreCase("6")) {
+			include("/crud.jsp",  renderRequest, renderResponse);
+		}else if(value.equalsIgnoreCase("7")) {
+			include("/liferayAPI.jsp",  renderRequest, renderResponse);
+		} else {
+			include("/view.jsp",  renderRequest, renderResponse);
+		}
+    
+    or
+    
+    renderRequest.setParameter("mvcPath","/renderURL.jsp");
+}

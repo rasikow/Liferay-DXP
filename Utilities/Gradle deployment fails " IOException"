@@ -1,0 +1,7 @@
+Issue: Gradle deployment fails with “java.io.IOException: The filename, directory name, or volume label syntax is incorrect”
+
+Solution : Windows uses \r\n for line endings, and everyone else uses \n. It is a path issue in gradle.properties.
+
+i have wrognly given the path as "liferay.workspace.home.dir=C:\XXX\Projects\LR72GA3\Server-7.2.0-b3" 
+
+but it should be "liferay.workspace.home.dir=C:/Zubair/Projects/LR72GA3/Server-7.2.0-b3"

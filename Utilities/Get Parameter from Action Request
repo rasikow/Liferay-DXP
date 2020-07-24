@@ -1,0 +1,19 @@
+	 Every input fields are prefixed by <portlet:namespace/> . This is mandatory otherwise you will not be able to read form fields in your process action.
+
+    View.jsp
+    ========
+    
+        First Name : <input type="text" name="<portlet:namespace />firstName"/>
+	    <br/>
+	    Last Name : <input type="text" name="<portlet:namespace />lastName"/>
+	    <br/>
+	    Iqama No : <input type="text" name="<portlet:namespace />iqama"/>
+	    
+	Process Action:
+    =============
+
+        String firstName = ParamUtil.getString(actionRequest, "firstName"); 
+		 String lastName = ParamUtil.getString(actionRequest, "lastName"); 
+		 String iqama = ParamUtil.getString(actionRequest, "iqama");
+	
+	

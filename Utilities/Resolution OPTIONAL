@@ -1,5 +1,0 @@
-Import-Package: \
-	com.liferay.portal.kernel.*;resolution:=optional, \
-	com.x.x.x.*;resolution:=optional, \
-	com.x.x.x.*;resolution:=optional, \
-	*

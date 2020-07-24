@@ -1,0 +1,14 @@
+Import-Package: \
+	com.liferay.portal.kernel.*;resolution:=optional, \
+	com.x.x.x.*;resolution:=optional, \
+	com.x.x.x.*;resolution:=optional, \
+	*
+
+
+Unresolved requirement :
+	1. open .bnd file 
+	2. add  this to take the depedency option and will take from runtime dynamically
+	 Import-Package: \ ;
+	                                resolution:=optional,\
+	                        ,\
+	                        *

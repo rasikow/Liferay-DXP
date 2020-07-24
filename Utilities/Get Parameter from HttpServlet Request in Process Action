@@ -1,0 +1,21 @@
+View to Process Action HttpServlet Request:
+==========================================
+
+    View.jsp
+    ========
+    
+             First Name : <input type="text" name="firstName"/>
+    	    <br/>
+    	    Last Name : <input type="text" name="lastName"/>
+    	    <br/>
+    	    Iqama No : <input type="text" name="iqama"/>
+        	    
+    Process Action:
+    =============
+	    
+            HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(actionRequest);
+            HttpServletRequest request = PortalUtil.getOriginalServletRequest(httpRequest);
+        	   
+        	String firstName = request.getParameter("firstName");
+        	String lastName = request.getParameter("lastName");
+        	String iqama =  request.getParameter("iqama");

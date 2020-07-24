@@ -1,0 +1,14 @@
+ <liferay-portlet:renderURL varImpl="iteratorURL">
+    <portlet:param name="mvcPath" value="/success.jsp" />
+</liferay-portlet:renderURL>
+
+<liferay-ui:search-container total="<%=list.size()%>" var="searchContainer" delta="1" deltaConfigurable="true" 
+  emptyResultsMessage="Oops. There Are No items To Display, Please add records" iteratorURL="<%= iteratorURL %>">
+  
+ <liferay-ui:search-container-results results="<%=ListUtil.subList(list, searchContainer.getStart(),searchContainer.getEnd())%>" />
+  <liferay-ui:search-container-row className="String" modelVar="data" >
+   <liferay-ui:search-container-column-text name="User Id" value="<%=data%>" />
+   
+  </liferay-ui:search-container-row>
+ <liferay-ui:search-iterator />
+   </liferay-ui:search-container>

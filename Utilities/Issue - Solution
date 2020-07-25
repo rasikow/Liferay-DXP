@@ -1,0 +1,120 @@
+ISSUE:
+
+ Invalid SDK settings. Configure app.server.parent.dir property 
+in build.<username>.properties to point to Liferay home
+
+inside ur plugin - create new properties like build.<username>.properties and add this belw entry:
+
+SOLUTION:
+#
+    # Specify the application server parent directory.
+    #
+    app.server.parent.dir=${sdk.dir}/../server
+    
+    
+===============================================
+    
+ISSUE:    org.apache.jasper.JasperException: PWC6345: There is an error in invoking javac.  A full JDK (not just JRE) is required
+
+
+SOLUTION:
+
+1) I made sure my JAVA_HOME pointed to my Java JDK (1.8.0_xx) and my JRE_HOME pointed to my Java JRE (1.8.0_xx)
+
+2) I removed the C:\ProgramData\Oracle\Java\javapath; from my PATH variables (there were 2 PATH variables, removed from both)
+
+3) Made sure my PATH variables (both) at the JDK Bin folder path: C:\Program Files\Java\jdk1.8.0_65\bin;
+
+Then I checked my CMD 'where java' and received the correct response: C:\Program Files\Java\jdk1.8.0_65\bin\java.exe
+
+4) In Eclipse, under the top menu: Windows > Preferences > Java > Installed JREs Here, I originally had the jre1.8.0_65, but I added the jdk1.8.0_65 and selected it.
+
+5) Finally, what seemed to make the biggest difference: Right-Click on your server, and at the bottom, select Properties.
+A window will open up, and the 3rd option, there's clickable text "Runtime Environment". 
+Click it and a popup will open, there will be a bottom drop-down under "Select runtime JRE" Here, I selected jdk1.8.0_65
+
+======================================
+1. Gradle install issue for SunCertPathBuilder:
+
+	Issue: PKIX path building failed:
+	
+	Description	Resource	Path	Location	Type
+	Could not install Gradle distribution from 'https://services.gradle.org/distributions/gradle-4.10.2-bin.zip'.
+	sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	unable to find valid certification path to requested target	
+	
+	Reason : proxy firewall from your corporate network is restricted to download gradle plugin from https. So just download the certificates.
+
+	SOLUTION: http://www.javasavvy.com/import-ssl-certificate-into-java-keystore/
+        ========
+
+         ( open the command prompt as administrator to avoid Filenotfound exception for the certificate)
+
+	KEY tool certificate imports command:
+
+	keytool -importcert -trustcacerts -file C:\Zubair\Softwares\gradleCertificate.cer -keystore cacerts -alias "gradle"
+	
+	keytool -importcert -trustcacerts -file C:\Zubair\Softwares\g1.cer -keystore cacerts -alias "gradle"
+
+
+	1. Check java version
+	2. Import certificates
+	3. Manually copy the gradle inside the folder C:\Users\gk2053520\.gradle\wrapper\dists\gradle-4.10.2-bin\<created folder>
+	4. Restart the system
+
+	
+=================================================================================================	
+	
+
+2. Proxy Issue for Gradle Dependencies:
+
+	
+	Issue: Could not run build action using Gradle distribution 'https://services.gradle.org/distributions/gradle-4.10.2-bin.zip'.
+	Could not resolve com.liferay:com.liferay.gradle.plugins.workspace:1.10.13.
+	Could not GET 'https://repository-cdn.liferay.com/nexus/content/groups/public/com/liferay/com.liferay.gradle.plugins.workspace/1.10.13/com.liferay.gradle.plugins.workspace-1.10.13.pom'.
+	sun.security.validator.ValidatorException:  PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target unable to find valid certification path to requested target
+	
+	Reason: Same as above
+	
+	SOLUTION: S1. Create gradle.properties in C:/users/<username>/.gradle loaction and add proxy properties
+	========
+	
+			org.gradle.java.home=C:\\Program Files\\Java\\jdk1.8.0_201\\jre
+			
+			systemProp.http.proxyHost=<hostName>
+			systemProp.http.proxyPort=<port>
+			systemProp.http.proxyUser=
+			systemProp.http.proxyPassword=
+			
+			systemProp.https.proxyHost=<hostName>
+			systemProp.https.proxyPort=<port>
+			systemProp.https.proxyUser=
+			systemProp.https.proxyPassword=
+	
+		 S2. Check Java versions and update . It should be java 8 above 101 build
+		 S3. Solution same as previous issue.
+
+=================================================================================
+
+4.Launching Gradle tasks failed due to an error in the referenced Gradle build.
+	Or
+	Could not resolve com.liferay:com.liferay.gradle.plugins.css.builder:2.2.4.
+	         > Could not get resource 'https://repository-cdn.liferay.com/nexus/content/groups/public/com/liferay/com.liferay.gradle.plugins.css.builder/2.2.4/com.liferay.gradle.plugins.css.builder-2.2.4.pom'.
+	            > Could not GET 'https://repository-cdn.liferay.com/nexus/content/groups/public/com/liferay/com.liferay.gradle.plugins.css.builder/2.2.4/com.liferay.gradle.plugins.css.builder-2.2.4.pom'.
+	               > sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+	
+SOLUTION : Change version from 2.2.4 to 2.2.6 - "com.liferay.gradle.plugins.css.builder", version: "2.2.6 / 3.3.0"
+
+
+=======================================================================
+
+5. ISSUE : Synchronize Gradle projects with workspace failed due to an error connecting to the Gradle build.
+ 
+
+
+SOLUTION: don’t have proper access to gradle url from your corporate environment. 
+
+
+====================================================================
+

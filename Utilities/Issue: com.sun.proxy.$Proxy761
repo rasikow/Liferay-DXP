@@ -1,0 +1,5 @@
+java.lang.ClassCastException: com.sun.proxy.$Proxy761 cannot be cast to BookLocalService.
+
+		 two copies of the same service class are loaded from different class loader. Because I have mentioned as compile Project instead of compileonly, so it was available inside the module and osgi container also,
+		compileOnly project(":modules:books-data:books-data-api")
+		compileOnly project (":modules:books-data:books-data-service

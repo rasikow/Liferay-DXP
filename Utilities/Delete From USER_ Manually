@@ -1,6 +1,5 @@
 delete from user_ where userid=USERID;
 delete from users_orgs where userid=USERID;
-delete from PORTAL.NES_USERDETAILS where userid=USERID;
 delete from contact_ where classpk=USERID;
 delete from group_ where classpk=USERID;
 delete from PORTAL.USERS_USERGROUPS where USERID=USERID;

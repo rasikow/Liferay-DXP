@@ -13,3 +13,17 @@ systemProp.http.proxyUser=userId
 systemProp.http.proxyPassword=yourPassword
 systemProp.https.proxyUser=userId
 systemProp.https.proxyPassword=yourPassword
+
+============
+
+By mistake if you delete the jars manually,
+
+Remove from these locations:
+
+1.files:  \.gradle\caches\modules-2\files-2.1\
+2.metadata: .gradle\caches\modules-2\metadata-2.63\descriptors
+
+Then Eclipse workspace -- right click and refresh the Gradle.
+
+==============
+

@@ -26,4 +26,17 @@ Remove from these locations:
 Then Eclipse workspace -- right click and refresh the Gradle.
 
 ==============
+SunCertPathBuilderException Exception:
 
+"https://repo.maven.apache.org/maven2/com/liferay/com.liferay.sass.compiler.ruby/2.0.5/com.liferay.sass.compiler.ruby-2.0.5.jar
+sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+
+To resolve sun certified issue:
+
+1. go to the target url :repo.maven.apache.org
+2. download certificate into local
+3. open cmd in admin mode and execute the below import
+  keytool –importcert –alias maven -file "D:\repo-maven-apache-org.cer" -keystore "C:\Program Files\Java\jdk1.8.0_201\jre\lib\security\cacerts" -storepass changeit
+4. Restart the system
+
+===============================

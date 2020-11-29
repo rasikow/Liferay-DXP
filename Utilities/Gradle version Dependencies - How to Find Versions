@@ -38,3 +38,6 @@ dependencies {
 	b. update the jar in build.gradle
 	c. redeploy again
 
+5. keep the jars into local folder (/src/main/resources/META-INF/resources/libs) and add provide reference in build.xml:
+
+compile fileTree(dir: '/src/main/resources/META-INF/resources/libs', include: '*.jar')

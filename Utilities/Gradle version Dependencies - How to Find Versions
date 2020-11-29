@@ -29,3 +29,12 @@ dependencies {
   
   1. you can give the bundle version of portal-kernel which is there in tomcat/lib : Bundle-Version: 4.0.0
   Ref:https://liferay.dev/blogs/-/blogs/choosing-osgi-versions-during-development
+
+
+
+4. Unresolved requirement during runtime :
+	a. find the jar from server:
+		ls -s |grep "jar name"   For Ex: ls -s |grep "jackson"
+	b. update the jar in build.gradle
+	c. redeploy again
+

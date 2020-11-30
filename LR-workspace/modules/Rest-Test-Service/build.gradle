@@ -1,7 +1,19 @@
+// Copy all the files inside the libs folder
 dependencies {
-	compileOnly group: "javax.ws.rs", name: "javax.ws.rs-api"
-	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations"
-//	compileOnly group: "org.osgi", name: "org.osgi.service.jaxrs", version: "1.0.0"
-	compile fileTree(dir: '/src/main/resources/META-INF/resources/libs', include: '*.jar')
-	
+		compileOnly group: "javax.ws.rs", name: "javax.ws.rs-api"
+		compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations"
+		compile fileTree(dir: '/src/main/resources/META-INF/resources/libs', include: '*.jar')
 	}
+
+//  from gradle repository
+//dependencies {
+//		compileOnly group: "javax.ws.rs", name: "javax.ws.rs-api"
+//		compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations"
+//		compileOnly group: "org.osgi", name: "org.osgi.service.jaxrs", version: "1.0.0"
+//		compileOnly group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.9.8'
+//		compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.10.3'
+//		compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.3'
+//		compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.3'
+//		compileOnly group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-base', version: '2.10.3'
+//		compileOnly group: 'com.fasterxml.jackson.module', name: 'jackson-module-jaxb-annotations', version: '2.10.3'
+//	}

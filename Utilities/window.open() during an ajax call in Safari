@@ -1,0 +1,9 @@
+Safari browser is tryinbg block the open of a new tab via window.open() during an ajax call.
+
+To fix :
+
+After the ajax call success , use this:
+
+    var newTab=window.open('about:blank');
+		newTab.location.href="http://xxxxxx.xxx";
+		newTab.focus();

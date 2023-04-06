@@ -1,0 +1,9 @@
+go to gradle.properties inside the workspace
+Add below entries.
+
+liferay.home=E:/Projects/LRDXP1/liferay-dxp-7.4.13.u62
+
+auto.deploy.enabled=true
+liferay.workspace.home.dir=E:\\Projects\\LRDXP1\\liferay-dxp-7.4.13.u62
+
+auto.deploy.deploy.dir=E:/Projects/LRDXP1/liferay-dxp-7.4.13.u62/deploy

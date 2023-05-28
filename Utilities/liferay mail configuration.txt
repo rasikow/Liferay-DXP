@@ -1,0 +1,192 @@
+1. test mail server
+
+create account :https://mailtrap.io/
+access inbox: https://mailtrap.io/inboxes/2225472/messages
+
+provide below config :
+
+incoming pop server: pop3.mailtrap.io
+incoming port : 1100
+username-7840b13536b3f2
+ password-2137bdf1922a15
+
+outgoing smto server :sandbox.smtp.mailtrap.io
+outgoing port : 2525
+
+enable startTLS
+
+username-7840b13536b3f2
+ password-2137bdf1922a15
+
+2. send mail. 
+
+
+package lms.teamlead.web.portlet;
+
+
+	
+	import com.liferay.mail.kernel.model.MailMessage;
+import com.liferay.mail.kernel.service.MailServiceUtil;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.util.StringUtil;
+
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
+	public class Mailer {
+
+		public static void sentMail(User user,JSONObject ticketDetails) {
+			String body = "";		
+
+			try {			
+		    		MailMessage mailMessage = new MailMessage();
+		    		mailMessage.setTo(new InternetAddress(user.getEmailAddress()));
+		    		mailMessage.setFrom(new InternetAddress("FacilityPortal@liferay.com"));
+		    		mailMessage.setSubject("From Facility Management Portal");
+		    		
+		    		
+		    		String notificationTitle = ticketDetails.getString("title");
+		    		String notificationDetails = ticketDetails.getString("status");
+			/*
+			 * String body = StringUtil.replace(getBodyTemplate(), new String[] {
+			 * "[$TITLE$]", "[$BODY_TEXT$]" }, new String[] { "<strong>" + notificationTitle
+			 * + "</strong>", notificationDetails });
+			 */
+		    		
+		    		
+		    		
+		    		
+		    		mailMessage.setBody("<html><body>" +
+		    			    "<p>Dear "+ ticketDetails.getString("assignedPerson") +"</p>" +
+		    			    "<p>You have been assigned a ticket. Please go and visit the issue as soon as possible. Here is the Details of the Ticket:</p>" +
+		    			    "<p><strong>Ticket ID:</strong>"+ ticketDetails.getString("ticketNumber") +"</p>" +
+		    			    "<p><strong>Ticket Name:</strong>"+ ticketDetails.getString("title") +"</p>" +
+		    			    "<p><strong>Ticket Description:</strong>"+ ticketDetails.getString("desc") +"</p>" +
+		    			    "<p><strong>Created Date:</strong>"+ ticketDetails.getString("createdDate") +"</p>" +
+		    			    "<p><strong>Team Lead:</strong>"+ ticketDetails.getString("teamLead") +"</p>" +
+		    			    "<p><strong>Click here for More Details:</strong> <a href='http://localhost:8080/web/facility-management-portal/ticket-management'>Click Ticket Details </a></p>" +
+
+		    			    "<p>Best Regards,</p>" +
+		    			    "<p>Admin, Facility Management Dept.</p>" +
+		    			    "</body></html>");
+		    		
+		    		mailMessage.setHTMLFormat(true);
+		    		
+		    		MailServiceUtil.sendEmail(mailMessage);
+			} catch (AddressException e) {
+			    	e.printStackTrace();
+			}
+		}
+		
+	
+		protected static String getBodyTemplate() throws Exception {
+			return "<div class=\"title\">[$TITLE$]</div><div>[$BODY_TEXT$]</div>";
+		}
+}
+
+4. build.gradle:
+
+compileOnly group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
+
+
+5. Testing mail in liferay from groovy:
+
+import com.liferay.mail.kernel.service.MailServiceUtil;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import com.liferay.mail.kernel.model.MailMessage;
+
+InternetAddress fromAddress = null;
+InternetAddress toAddress = null;
+
+try {
+ 	fromAddress = new InternetAddress("admin@liferay.com");
+    	toAddress = new InternetAddress("test-user@liferay.com");
+    	MailMessage mailMessage = new MailMessage();
+mailMessage.setHTMLFormat(true);
+    	mailMessage.setTo(toAddress);
+    	mailMessage.setFrom(fromAddress);
+    	mailMessage.setSubject("Testing mail with Plain Text");
+    	mailMessage.setBody("This Mail Comes From Liferay");
+    	MailServiceUtil.sendEmail(mailMessage);
+    	System.out.println("Send mail with Plain Text");
+} catch (AddressException e) {
+    	System.out.println(e);
+}
+=========================
+
+mail format from workflow: ( control panel -- instance setting - email --> change email sender
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Health Card Approval</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .content {
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+        }
+        
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Health Card Approval</h1>
+        </div>
+<div class="logo">
+            <img src="https://www.ehs.gov.ae/app_themes/fg21001/images/ehs-logo.svg" alt="Logo" width="200" height="auto">
+        </div>
+        <div class="content">
+            <p>Dear ${userName},</p>
+            <p>We are pleased to inform you that your health card application has been created successfully. Your new health card is now under review for activation.</p>
+            <p>Please click the button below to know the status of the Healthcard</p>
+            <a href="http://localhost:8080/group/ehs/myhealthcard" class="btn">Click to know Health Card Status</a>
+        </div>
+        <div class="footer">
+            <p>Your feedback is highly appreciated. If you have any questions or need further assistance, please don't hesitate to contact our support team.</p>
+            <p>Thank you for choosing our health card services.</p>
+        </div>
+    </div>
+</body>
+</html>
+
+

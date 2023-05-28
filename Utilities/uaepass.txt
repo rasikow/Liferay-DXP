@@ -1,0 +1,62 @@
+ref: uaepass
+
+https://medium.com/identity-beyond-borders/integrating-uae-pass-as-the-federated-authentication-in-wso2-identity-server-5-11-0-c61b87042578#:~:text=Navigate%20to%20your%20application%20and,will%20prompt%20for%20the%20authorization.
+
+https://api.government.ae/abs/static/Government%20API%20Marketplace%20User%20Guide%20En.pdf
+https://docs.uaepass.ae/faq/common-integration-issues
+https://docs.uaepass.ae/guides/authentication/web-application/1.-obtaining-the-oauth2-access-code
+https://docs.uaepass.ae/guides/authentication/web-application/endpoints
+
+
+
+
+=================
+
+
+https://docs.uaepass.ae/faq/common-integration-issues
+https://docs.uaepass.ae/guides/authentication/web-application/1.-obtaining-the-oauth2-access-code
+
+https://stg-ids.uaepass.ae/authenticationendpoint/login.do?acr_values=urn%3Asafelayer%3Atws%3Apolicies%3Aauthentication%3Alevel%3Alow&client_id=sandbox_stage&commonAuthCallerPath=%2Foauth2%2Fauthorize&forceAuth=false&passiveAuth=false&redirect_uri=http%3A%2F%2Flocalhost%3A8080&response_type=code&scope=urn%3Auae%3Adigitalid%3Aprofile%3Ageneral&state=HnlHOJTkTb66Y5H&tenantDomain=carbon.super&sessionDataKey=b9410a6c-35bf-427f-9241-61675a704a31&relyingParty=sandbox_stage&type=oauth2&sp=UAE+PASS+Staging+Sandbox&isSaaSApp=false&reCaptcha=TRUE&authenticators=BasicAuthenticator%3ALOCAL
+
+
+install staging app for uaepass
+crate account with email id
+call authorize - and below url for calling authorize
+call token with above url code - above url will response token
+call user - pass the token to user api to get details
+
+https://stg-id.uaepass.ae/idshub/authorize?response_type=code&client_id=sandbox_stage&scope=urn:uae:digitalid:profile:general&state=HnlHOJTkTb66Y5H&redirect_uri=http://localhost:8080/uaepass&acr_values=urn:safelayer:tws:policies:authentication:level:low&scope=urn:uae:digitalid:profile:general&clientSecret=sandbox_stage
+
+https://stg-id.uaepass.ae/idshub/logout
+
+================================================
+Sample response:
+
+
+{
+  "sub": "800F475AC0E7A9ED01B2D5D2C25A59B3",
+  "userType": "SOP3",
+  "fullnameAR": "سميث جون",
+  "fullnameEN": "John Smith",
+  "gender": "Male",
+  "lastnameEN": "Smith",
+  "nationalityAR": "الهند",
+  "firstnameEN": "John",
+  "idn": "784000000000000",
+  "idType": "ID",
+  "email": "john.smith@organization.com",
+  "spuuid": "b1320896-fb2e-5140-baf0-fa915eb9be5d",
+  "nationalityEN": "IND",
+  "firstnameAR": "جون",
+  "lastnameAR": "سميث",
+  "acr": "urn:safelayer:tws:policies:authentication:level:high",
+  "mobile": "9715555555555",
+  "titleEN": "Dr.",
+  "titleAR": ".د",
+  "amr": [
+    "urn:safelayer:tws:policies:authentication:adaptive:methods:mobileid",
+    "urn:uae:authentication:method:verified"
+  ]
+}
+
+

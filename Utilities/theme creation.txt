@@ -1,0 +1,14 @@
+1. install Node.js
+
+https://nodejs.org/en
+
+2.https://help.liferay.com/hc/en-us/articles/360028302451-Setting-up-Your-npm-Environment-
+
+
+https://www.youtube.com/watch?v=iyyMSfR4Wd0
+
+https://www.surekhatech.com/blog/liferay-7-dxp-theme-development-using-theme-generator
+
+
+gulp build
+ gulp deploy
